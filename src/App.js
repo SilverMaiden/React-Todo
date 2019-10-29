@@ -58,6 +58,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
+        <div className="paper"> </div>
         <h2>My Todo List: MVP</h2>
         <TodoList todoList={this.state.todoList} completed={this.state.completed} completedHandler={this.completedHandler}/>
         <br />

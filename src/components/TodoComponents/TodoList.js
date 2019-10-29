@@ -7,11 +7,11 @@ const TodoList = props => {
         return (
             <>
                 {props.todoList.map(element => (
-                    <p id={element} onClick={props.completedHandler}> {element} </p>
+                    <li id={element} onClick={props.completedHandler}> {element} </li>
                 ))}
 
                 {props.completed.map(element => (
-                    <p><strike> {element} </strike></p>
+                    <li><strike> {element} </strike></li>
                 ))}
 
             </>
