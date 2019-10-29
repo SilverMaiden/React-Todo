@@ -2,11 +2,16 @@
 // feel free to change this component.js into TodoList.js
 import React from 'react';
 
+
 const TodoList = props => {
         return (
             <>
                 {props.todoList.map(element => (
-                    <p> {element} </p>
+                    <p id={element} onClick={props.completedHandler}> {element} </p>
+                ))}
+
+                {props.completed.map(element => (
+                    <p><strike> {element} </strike></p>
                 ))}
 
             </>

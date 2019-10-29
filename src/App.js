@@ -2,7 +2,8 @@ import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 
-const todoList = ["Do projects", "complete MVP"];
+const todoList = ["Do projects", "Complete MVP"];
+const completed = [];
 
 
 
@@ -14,10 +15,33 @@ class App extends React.Component {
         super(props);
         this.state = {
             todoList,
+            completed,
             inputValue: "",
         };
     }
 
+    completedHandler = event => {
+        event.preventDefault();
+        console.log(event.target.id)
+        let index = this.state.todoList.indexOf(event.target.id);
+        let pretendTodoList = this.state.todoList;
+            this.setState({completed: [...this.state.completed, pretendTodoList.splice(index, 1)]});
+            this.setState({todoList: this.state.todoList.filter(element => {
+                return !this.state.completed.includes(element);
+            })})
+            console.log(todoList)
+    }
+
+    clearCompletedHandler = event => {
+        event.preventDefault();
+        this.setState({completed: []});
+    }
+
+    /*
+    incompleteHandler = event => {
+        event.preventDefault();
+        this.setState({todoList: [...this.state.todoList, completed.splice]})
+    } */
     inputChangeHandler = event => {
         event.preventDefault();
         console.log(event.target.value);
@@ -33,10 +57,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Todo List: MVP</h2>
-        <TodoList todoList={this.state.todoList}/>
-        <TodoForm submitHandler={this.listSubmitHandler} changeHandler={this.inputChangeHandler} />
+      <div className="container">
+        <h2>My Todo List: MVP</h2>
+        <TodoList todoList={this.state.todoList} completed={this.state.completed} completedHandler={this.completedHandler}/>
+        <br />
+        <TodoForm submitHandler={this.listSubmitHandler} changeHandler={this.inputChangeHandler} clearHandler={this.clearCompletedHandler}  />
       </div>
     );
   }
